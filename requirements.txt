@@ -1,0 +1,7 @@
+fastapi
+httpx
+pytest
+alembic
+bcrypt
+PyJWT
+sqlalchemy
