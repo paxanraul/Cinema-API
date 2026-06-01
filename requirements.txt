@@ -11,3 +11,4 @@ pydantic
 pydantic-settings
 PyJWT[crypto]
 passlib[crypto]
+python-multipart
