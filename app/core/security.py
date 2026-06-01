@@ -34,12 +34,12 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta]):
     
 
     to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, settings.SECRET_KEY, settings.ALGORITHM)
+    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
 
 def decode_access_token(token: str) -> Optional[dict]:
     """Decodes and validates the JWT token"""
     try:
-        return jwt.encode(token, settings.SECRET_KEY, settings.ALGORITHM)
+        return jwt.decode(token, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     except jwt.PyJWTError:
         return None
