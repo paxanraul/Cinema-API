@@ -22,7 +22,7 @@ class UserLogin(UserBase):
 class UserResponse(BaseModel):
     id: int
     first_name: str
-    second_name: str
+    last_name: str
     patronymic: str | None = None
     email: EmailStr
     is_active: bool
