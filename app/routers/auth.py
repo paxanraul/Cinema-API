@@ -84,6 +84,6 @@ def deactivate_account(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    deactivate_account(db, current_user)
+    deactivate_user(db, current_user)
 
     return {"detail": "Account deactivated successfully"}
