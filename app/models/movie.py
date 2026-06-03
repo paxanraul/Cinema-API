@@ -16,6 +16,8 @@ class Movie(Base):
     genre: Mapped[str] = mapped_column(nullable=False)
     director: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    
+    sessions: Mapped[list["Session"]] = relationship(back_populates="movie")
 
     __table_args__ = (
         CheckConstraint('year >= 1888 AND year <= 2100', name='check_year_range'),
