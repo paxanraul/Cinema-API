@@ -39,5 +39,5 @@ def authenticate_user(db: Session, email: str, password: str) -> User | None:
 def deactivate_user(db: Session, user: User) -> User:
     user.is_active = False
     db.commit()
-    db.refresh(User)
+    db.refresh(user)
     return user
