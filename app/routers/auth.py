@@ -14,7 +14,7 @@ from app.services.user_service import (
 )
 from app.models.user import User
 from app.dependencies.auth import get_current_user
-from app.core.security import create_access_token, decode_access_token
+from app.core.security import create_access_token
 from app.core.config import settings
 
 
