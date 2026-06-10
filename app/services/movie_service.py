@@ -21,5 +21,14 @@ def update_movie(db: Session, movie_id: int, movie_data: MovieCreate) -> Movie:
 	for key, value in movie_data.model_dump().items():
 		setattr(movie, key, value)
 	db.commit()
-	db.refresh(Movie)
+	db.refresh(movie)
+	return movie
+
+
+def delete_movie(db: Session, movie_id: int) -> Movie:
+	movie = db.query(Movie).filter(Movie.id == movie_id).first()
+	if not movie:
+		return None
+	movie.is_active = False
+	db.commit()
 	return movie
