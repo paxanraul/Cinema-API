@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
+from typing import Optional
 
 class MovieCreate(BaseModel):
     name: str = Field(..., min_length=2, max_length=30)
