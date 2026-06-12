@@ -14,6 +14,7 @@ class Booking(Base):
     session_id: Mapped[int] = mapped_column(ForeignKey("sessions.id"), nullable=False)
     start_time: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     status: Mapped[str] = mapped_column(String(20), default="pending", nullable=False)
+    is_active: Mapped[bool] = mapped_column(default=True)
 
     user: Mapped["User"] = relationship(back_populates="bookings") # type: ignore
     session: Mapped["Session"] = relationship(back_populates="bookings") # type: ignore
