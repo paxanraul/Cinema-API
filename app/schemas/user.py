@@ -9,7 +9,7 @@ class UserBase(BaseModel):
 class UserRegister(BaseModel):
     first_name: str = Field(..., description="Enter your first name.")
     last_name: str = Field(..., description="Enter your second name.")
-    patronymic: str | None = Field(..., default=None, description="Enter your patronymic.")
+    patronymic: str | None = Field(..., description="Enter your patronymic.")
     email: EmailStr = Field(..., description="Enter your email.")
     password: str = Field(..., min_length=8, description="Enter your password.")
     password_confirm: str = Field(..., min_length=8, description="Confirm your password.")
