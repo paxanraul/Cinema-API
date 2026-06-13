@@ -14,9 +14,11 @@ def get_my_bookings(db: Session, user_id: int):
 	return db.query(Booking).filter(Booking.user_id == user_id, Booking.is_active == True).all()
 
 
-def delete_booking(db: Session, booking_id: int) -> Booking:
+def delete_booking(db: Session, booking_id: int, user_id: int) -> Booking:
 	booking = db.query(Booking).filter(Booking.id==booking_id).first()
 	if not booking:
+		return None
+	if booking.user_id != user_id:
 		return None
 	booking.is_active = False
 	db.commit()
