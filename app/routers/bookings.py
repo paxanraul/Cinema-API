@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.dependencies.auth import get_current_user
 from app.schemas.booking import BookingCreate, BookingResponse
-from app.models.booking import Booking
 from app.services.booking_service import create_booking, delete_booking, get_my_bookings
 from app.models.user import User
 
