@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from app.routers import auth, sessions, bookings, movies
 from app.db.session import SessionLocal
+from app.middleware.logging import log_requests
 
 
 @asynccontextmanager
@@ -21,6 +22,7 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.middleware("http")(log_requests)
 
 app.include_router(auth.router)
 app.include_router(sessions.router)
