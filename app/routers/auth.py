@@ -16,6 +16,7 @@ from app.models.user import User
 from app.dependencies.auth import get_current_user
 from app.core.security import create_access_token
 from app.core.config import settings
+from app.core.limiter import limiter
 
 
 router = APIRouter(
@@ -25,6 +26,7 @@ router = APIRouter(
 
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit("5/minute")
 def register(
     user_data: UserRegister,
     db: Session = Depends(get_db)    
@@ -48,6 +50,7 @@ def register(
 
 
 @router.post("/login", response_model=TokenResponse)
+@limiter.limit("5/minute")
 def login(
     login_data: Login,
     db: Session = Depends(get_db)
