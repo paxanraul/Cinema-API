@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -28,6 +28,7 @@ router = APIRouter(
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 @limiter.limit("5/minute")
 def register(
+    request: Request,
     user_data: UserRegister,
     db: Session = Depends(get_db)    
 ):
@@ -52,6 +53,7 @@ def register(
 @router.post("/login", response_model=TokenResponse)
 @limiter.limit("5/minute")
 def login(
+    request: Request,
     login_data: Login,
     db: Session = Depends(get_db)
 ):
