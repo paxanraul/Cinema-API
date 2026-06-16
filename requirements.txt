@@ -12,3 +12,4 @@ pydantic-settings
 PyJWT[crypto]
 passlib[crypto]
 email-validator
+slowapi
