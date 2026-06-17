@@ -17,7 +17,10 @@ router = APIRouter(
 )
 
 @router.get("/all_movies", response_model=list[MovieResponse])
-def get_movies(db: Session = Depends(get_db)):
+def get_movies(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
     movies = get_all_movies(db)
     return movies
 
