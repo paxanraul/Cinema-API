@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -17,7 +18,9 @@ from app.dependencies.auth import get_current_user
 from app.core.security import create_access_token
 from app.core.config import settings
 from app.core.limiter import limiter
+from app.models.token_blacklist import TokenBlackList
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 router = APIRouter(
     prefix="/auth",
@@ -92,3 +95,15 @@ def deactivate_account(
     deactivate_user(db, current_user)
 
     return {"detail": "Account deactivated successfully"}
+
+
+@router.post("/logout", status_code=status.HTTP_200_OK)
+def logout(
+    token: str = Depends(oauth2_scheme),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    blacklisted = TokenBlackList(token=token, user_id=current_user.id)
+    db.add(blacklisted)
+    db.commit()
+    return {"detail": "Logged out successfully"}
