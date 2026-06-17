@@ -6,6 +6,7 @@ import jwt
 from app.db.session import get_db
 from app.core.config import settings
 from app.models.user import User
+from app.models.token_blacklist import TokenBlackList
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
@@ -13,6 +14,14 @@ def get_current_user(
         token: str = Depends(oauth2_scheme),
         db: Session = Depends(get_db)
 ):
+    in_blacklist = db.query(TokenBlackList).filter(TokenBlackList.token == token).first()
+    if in_blacklist:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token has been revoked",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     # Verifies the PyJWT token and performs all user checks in the database
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
