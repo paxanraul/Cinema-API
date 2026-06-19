@@ -1,5 +1,3 @@
-import pytest
-
 def test_get_movies_unauthorized(client):
 	response = client.get("/movies/all_movies")
 	assert response.status_code == 401
