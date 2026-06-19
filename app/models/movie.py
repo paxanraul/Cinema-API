@@ -11,7 +11,7 @@ class Movie(Base):
     name: Mapped[str] = mapped_column(String(30))
     year: Mapped[int] = mapped_column()
     description: Mapped[str] = mapped_column(nullable=False)
-    duration_minutes: Mapped[int] = mapped_column(nullable=False)
+    duration_limites: Mapped[int] = mapped_column(nullable=False)
     rating: Mapped[float] = mapped_column(Float, default=0.0)
     genre: Mapped[str] = mapped_column(nullable=False)
     director: Mapped[str] = mapped_column(nullable=False)
