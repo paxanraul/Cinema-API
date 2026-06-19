@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_register_success(client, user_data):
 	response = client.post("/auth/register", json=user_data)
 	assert response.status_code == 201
