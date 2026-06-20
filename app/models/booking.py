@@ -12,7 +12,7 @@ class Booking(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     session_id: Mapped[int] = mapped_column(ForeignKey("sessions.id"), nullable=False)
-    start_time: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    start_time: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     status: Mapped[str] = mapped_column(String(20), default="pending", nullable=False)
     is_active: Mapped[bool] = mapped_column(default=True)
 
