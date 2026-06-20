@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from app.routers import auth, sessions, bookings, movies
+from app.routers import auth, sessions, bookings, movies, halls
 from app.db.session import SessionLocal
 from app.middleware.logging import log_requests
 from app.core.limiter import limiter
@@ -37,6 +37,7 @@ app.include_router(auth.router)
 app.include_router(sessions.router)
 app.include_router(bookings.router)
 app.include_router(movies.router)
+app.include_router(halls.router)
 
 @app.get("/health")
 def get_health():
