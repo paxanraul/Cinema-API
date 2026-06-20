@@ -5,7 +5,7 @@ class MovieCreate(BaseModel):
     year: int = Field(..., ge=1888, le=2100)
     rating: float = Field(default=0.0, ge=0, le=10)
     description: str
-    duration_limites: int
+    duration_minutes: int
     genre: str
     director: str
 
@@ -17,7 +17,7 @@ class MovieResponse(BaseModel):
     year: int
     rating: float
     description: str
-    duration_limites: int
+    duration_minutes: int
     genre: str
     director: str
 
