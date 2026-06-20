@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
-from app.models.movie import Movie
 from app.models.user import User
 from app.dependencies.auth import get_current_user
 from app.schemas.movie import MovieCreate, MovieResponse
