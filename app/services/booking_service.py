@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
+from datetime import datetime
 
 from app.models.booking import Booking
 from app.schemas.booking import BookingCreate
@@ -12,7 +12,7 @@ def create_booking(db: Session, booking_data: BookingCreate, user_id: int) -> Bo
 	if not session:
 		raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Сеанс не найден")
 
-	if session.start_time < datetime.now(timezone.utc):
+	if session.start_time < datetime.now():
 		raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Сеанс уже прошёл")
 
 	booking = Booking(**booking_data.model_dump(), user_id=user_id)
