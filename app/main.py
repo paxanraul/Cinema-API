@@ -5,6 +5,7 @@ from slowapi.errors import RateLimitExceeded
 
 from app.routers import auth, sessions, bookings, movies, halls
 from app.db.session import SessionLocal
+from app.db.seed import run_seed
 from app.middleware.logging import log_requests
 from app.core.limiter import limiter
 
@@ -13,7 +14,7 @@ from app.core.limiter import limiter
 async def lifespan(app: FastAPI):
 	db = SessionLocal()
 	try:
-		yield
+		run_seed(db)
 	finally:
 		db.close()		
 
