@@ -11,5 +11,6 @@ class HallResponse(BaseModel):
 	name: str
 	capacity: int
 	location: str
+	is_active: bool
 
 	model_config = ConfigDict(from_attributes=True)
