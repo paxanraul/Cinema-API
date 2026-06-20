@@ -17,7 +17,7 @@ def get_all_movies(db: Session):
 def update_movie(db: Session, movie_id: int, movie_data: MovieCreate) -> Movie:
 	movie = db.query(Movie).filter(Movie.id == movie_id).first()
 	if not movie:
-		return {"Error": "It's not a movie."}
+		return None
 	for key, value in movie_data.model_dump().items():
 		setattr(movie, key, value)
 	db.commit()
