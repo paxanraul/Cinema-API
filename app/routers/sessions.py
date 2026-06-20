@@ -28,5 +28,5 @@ def add_session(
 	current_user: User = Depends(get_current_user),
 	db: Session = Depends(get_db)
 ):
-	sessions = create_session(db, session_data, current_user.id)
+	sessions = create_session(db, session_data)
 	return sessions
