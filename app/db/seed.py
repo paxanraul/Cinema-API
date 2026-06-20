@@ -27,7 +27,7 @@ def run_seed(db: Session) -> None:
         name="Inception",
         year=2010,
         description="Sci-fi about dreams within dreams",
-        duration_limites=148,
+        duration_minutes=148,
         rating=8.8,
         genre="Sci-Fi",
         director="Christopher Nolan",
