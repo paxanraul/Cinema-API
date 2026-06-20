@@ -29,7 +29,7 @@ def test_create_movie(client, user_data):
 			"name": "Тест",
 			"year": 2026,
 			"description": "Описание",
-			"duration_limites": 120,
+			"duration_minutes": 120,
 			"genre": "Crime",
 			"director": "Иванов"
 		},
