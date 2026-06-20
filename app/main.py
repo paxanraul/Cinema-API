@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
 		run_seed(db)
 	finally:
 		db.close()		
-
+	yield
 
 app = FastAPI(
     title="CinemaAPI",
